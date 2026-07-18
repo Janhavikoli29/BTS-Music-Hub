@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BTS Music Hub</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- 1. NAVIGATION BAR -->
+    <nav>
+      <div class="left-half">
+        <div class="logo">
+          <!-- Pure Code BTS Logo -->
+          <svg
+            class="bts-logo-svg"
+            viewBox="0 0 100 140"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <!-- Left Door -->
+            <polygon points="5,20 42,32 42,108 5,120" />
+            <!-- Right Door -->
+            <polygon points="95,20 58,32 58,108 95,120" />
+          </svg>
+          <span>BTS Music Hub</span>
+        </div>
+        <i class="fa-solid fa-house home-icon"></i>
+        <div class="search-bar">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input
+            type="text"
+            class="input-box"
+            placeholder="Search for songs, descriptions..."
+          />
+          <i class="fa-solid fa-compass browse-icon"></i>
+        </div>
+      </div>
+
+      <div class="right-half">
+        <div class="right-half-p1">
+          <span class="nav-text">Support</span>
+          <span class="nav-text">Download</span>
+        </div>
+        <div class="right-half-p2" id="authProfileArea">
+          <span id="signupNavBtn" class="signup-toggle">Sign Up</span>
+          <button id="loginNavBtn" class="login-btn">Log In</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 2. MAIN HUB LAYOUT CONTAINER -->
+    <div class="main">
+      <!-- LEFT PANEL SIDEBAR -->
+      <div class="main-left-part">
+        <div class="library">
+          <p><i class="fa-solid fa-compact-disc"></i> Your Library</p>
+          <div id="addPlaylistBtn" title="Create Playlist">+</div>
+        </div>
+
+        <div class="box-container">
+          <div class="playlist-section">
+            <div class="playlist-header-title">Playlists</div>
+            <ul id="playlistList" class="playlist-list">
+              <!-- JavaScript dynamically injects playlist items here -->
+            </ul>
+            <div
+              class="box"
+              id="createPlaylistAction"
+              style="margin-top: 1rem; cursor: pointer"
+            >
+              <h4>Create your first playlist</h4>
+              <p>It's easy, we'll help you</p>
+              <button style="margin-top: 0.5rem; pointer-events: none">
+                Create Playlist
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT PANEL MAIN FEED CONTENT -->
+      <div class="main-right-part">
+        <!-- History Section Row -->
+        <div class="music-section">
+          <h2>Recently Played</h2>
+          <div class="songs" id="recentlyPlayedContainer">
+            <!-- JavaScript dynamically injects cards here -->
+          </div>
+        </div>
+
+        <!-- Main Stream Rows -->
+        <div class="music-section">
+          <h2>Popular Tracks</h2>
+          <div class="songs" id="popularSongsContainer">
+            <!-- JavaScript dynamically injects cards here -->
+          </div>
+        </div>
+
+        <div class="music-section">
+          <h2>Recommended For You</h2>
+          <div class="songs" id="recommendedSongsContainer">
+            <!-- JavaScript dynamically injects cards here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. PERSISTENT PLAYER FOOTER BAR -->
+    <div class="player-bar">
+      <!-- Left Wing Side Details -->
+      <div class="now-bar">
+        <img src="Images/Arirang.jpg" alt="Current Album Art" />
+        <div style="display: flex; flex-direction: column">
+          <div class="img-title-info">Select a track</div>
+          <div class="img-des-info">Click play to start listening</div>
+        </div>
+      </div>
+
+      <!-- Central Media Flow Controls -->
+      <div class="music-controller">
+        <div class="player">
+          <i
+            class="fa-solid fa-shuffle player-btns"
+            id="shuffle"
+            title="Shuffle"
+          ></i>
+          <i class="fa-solid fa-backward-step player-btns" id="backward"></i>
+          <i class="fa-solid fa-circle-play player-btns" id="play"></i>
+          <i class="fa-solid fa-forward-step player-btns" id="forward"></i>
+          <i
+            class="fa-solid fa-repeat player-btns"
+            id="repeat"
+            title="Repeat Track"
+          ></i>
+        </div>
+        <input type="range" id="progressBar" min="0" max="100" value="0" />
+      </div>
+
+      <!-- Right Wing Audio Accessories -->
+      <div class="volume-container">
+        <i class="fa-solid fa-volume-high" id="volumeIcon"></i>
+        <input type="range" id="volumeBar" min="0" max="100" value="100" />
+      </div>
+    </div>
+
+    <!-- 4. UNIFIED AUTH MODAL OVERLAY -->
+    <div class="auth-overlay" id="authOverlay">
+      <div class="auth-modal-card">
+        <button class="close-modal-btn" id="closeModalBtn">&times;</button>
+        
+        <!-- Tab Switches -->
+        <div class="auth-tabs">
+          <button class="auth-tab active-tab" id="tabLogin">Log In</button>
+          <button class="auth-tab" id="tabSignup">Sign Up</button>
+        </div>
+
+        <!-- Login Content Block -->
+        <div id="loginFormBox" class="auth-form-view">
+          <form id="loginForm">
+            <div class="form-group">
+              <label for="loginEmail">Email address</label>
+              <input
+                type="email"
+                id="loginEmail"
+                required
+                placeholder="Email address"
+              />
+            </div>
+            <div class="form-group">
+              <label for="loginPassword">Password</label>
+              <input
+                type="password"
+                id="loginPassword"
+                required
+                placeholder="Password"
+              />
+            </div>
+            <button type="submit" class="auth-action-btn">Log In</button>
+          </form>
+        </div>
+
+        <!-- Signup Content Block -->
+        <div id="signupFormBox" class="auth-form-view hidden-view">
+          <form id="signupForm">
+            <div class="form-group">
+              <label for="signupName">Username</label>
+              <input
+                type="text"
+                id="signupName"
+                required
+                placeholder="Choose username"
+              />
+            </div>
+            <div class="form-group">
+              <label for="signupEmail">Email address</label>
+              <input
+                type="email"
+                id="signupEmail"
+                required
+                placeholder="Enter email"
+              />
+            </div>
+            <div class="form-group">
+              <label for="signupPassword">Password</label>
+              <input
+                type="password"
+                id="signupPassword"
+                required
+                placeholder="Create password"
+              />
+            </div>
+            <button type="submit" class="auth-action-btn">Create Account</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
